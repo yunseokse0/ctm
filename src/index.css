@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.map-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.map {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.map-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+.map-error h3 {
+  margin-bottom: 16px;
+  color: #ff6b6b;
+}
+
+.map-error p {
+  margin-bottom: 20px;
+  color: #cccccc;
+}
+
+.map-error button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.map-error button:hover {
+  background: #0056b3;
+}
+
+/* Mapbox GL JS 다크 테마 스타일링 */
+.mapboxgl-popup-content {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+  border: 1px solid #444444 !important;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: #2d2d2d !important;
+}
+
+.mapboxgl-ctrl-group {
+  background-color: #2d2d2d !important;
+  border: 1px solid #444444 !important;
+}
+
+.mapboxgl-ctrl-group button {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+}
+
+.mapboxgl-ctrl-group button:hover {
+  background-color: #444444 !important;
+}
+
+.mapboxgl-ctrl-zoom-in,
+.mapboxgl-ctrl-zoom-out {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+}
+
+.mapboxgl-ctrl-zoom-in:hover,
+.mapboxgl-ctrl-zoom-out:hover {
+  background-color: #444444 !important;
+}

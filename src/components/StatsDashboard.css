@@ -1,0 +1,191 @@
+.stats-dashboard {
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid #444444;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+}
+
+.stats-header h3 {
+  margin: 0 0 20px 0;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: #333333;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #555555;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.stat-card.total {
+  border-color: #007bff;
+}
+
+.stat-card.casualties {
+  border-color: #dc3545;
+}
+
+.stat-card.ongoing {
+  border-color: #ffc107;
+}
+
+.stat-card.resolved {
+  border-color: #28a745;
+}
+
+.stat-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #cccccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.severity-breakdown h4 {
+  margin: 0 0 16px 0;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.severity-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.severity-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bar-label {
+  font-size: 12px;
+  color: #cccccc;
+  min-width: 60px;
+  font-weight: 500;
+}
+
+.bar-container {
+  flex: 1;
+  height: 8px;
+  background: #444444;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.severity-bar.war .bar-fill {
+  background: linear-gradient(90deg, #dc3545, #ff6b6b);
+}
+
+.severity-bar.conflict .bar-fill {
+  background: linear-gradient(90deg, #fd7e14, #ffa726);
+}
+
+.severity-bar.disorder .bar-fill {
+  background: linear-gradient(90deg, #ffc107, #ffeb3b);
+}
+
+.bar-value {
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: right;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .stats-dashboard {
+    margin: 10px;
+    padding: 16px;
+    max-width: none;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .stat-card {
+    padding: 12px;
+  }
+  
+  .stat-icon {
+    font-size: 20px;
+  }
+  
+  .stat-number {
+    font-size: 18px;
+  }
+  
+  .stat-label {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-dashboard {
+    margin: 5px;
+    padding: 12px;
+  }
+  
+  .severity-bar {
+    gap: 8px;
+  }
+  
+  .bar-label {
+    min-width: 50px;
+    font-size: 11px;
+  }
+  
+  .bar-value {
+    font-size: 11px;
+  }
+}
