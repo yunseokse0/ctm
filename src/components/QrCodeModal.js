@@ -41,7 +41,7 @@ const QrCodeModal = ({ onClose, walletAddress }) => {
                   <strong>Network:</strong> Tron (TRC-20)
                 </div>
                 <div className="shortlink-info">
-                  <strong>Short Link:</strong> <a href="https://ctm.vercel.app" target="_blank" rel="noopener noreferrer">ctm.vercel.app</a>
+                  <strong>Short Link:</strong> <a href="https://ctm-4d7u3szql-yunseokseos-projects.vercel.app" target="_blank" rel="noopener noreferrer">ctm.vercel.app</a>
                 </div>
             <ol>
               <li>Open your USDT wallet app</li>
