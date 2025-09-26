@@ -32,14 +32,17 @@ const QrCodeModal = ({ onClose, walletAddress }) => {
               />
             </div>
           
-          <div className="qr-instructions">
-            <h3>How to Donate:</h3>
-            <div className="wallet-address">
-              <strong>Address:</strong> {walletAddress}
-            </div>
-            <div className="network-warning">
-              <strong>Network:</strong> Tron (TRC-20)
-            </div>
+              <div className="qr-instructions">
+                <h3>How to Donate:</h3>
+                <div className="wallet-address">
+                  <strong>Address:</strong> {walletAddress}
+                </div>
+                <div className="network-warning">
+                  <strong>Network:</strong> Tron (TRC-20)
+                </div>
+                <div className="shortlink-info">
+                  <strong>Short Link:</strong> <a href="https://ctm.vercel.app" target="_blank" rel="noopener noreferrer">ctm.vercel.app</a>
+                </div>
             <ol>
               <li>Open your USDT wallet app</li>
               <li>Scan this QR code or copy the address</li>

@@ -3,7 +3,6 @@ import './DonationBanner.css';
 
 const DonationBanner = ({ walletAddress, onShowQr }) => {
   const [copied, setCopied] = useState(false);
-  // const [showUrgency, setShowUrgency] = useState(false);
   const [timeOnSite, setTimeOnSite] = useState(0);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ const DonationBanner = ({ walletAddress, onShowQr }) => {
     return () => clearInterval(interval);
   }, []);
 
-  // 2분 후 긴급성 메시지 표시
+  // 2분 후 긴급성 메시지 표시 (현재 비활성화)
   // useEffect(() => {
   //   if (timeOnSite > 120) {
   //     setShowUrgency(true);

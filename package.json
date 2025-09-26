@@ -23,7 +23,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://username.github.io/ctm",
+  "homepage": ".",
   "eslintConfig": {
     "extends": [
       "react-app",
