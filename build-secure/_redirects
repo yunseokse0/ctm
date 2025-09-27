@@ -1,8 +1,8 @@
-# Netlify redirects (if using Netlify)
-/*    /index.html   200
+# Static files should be served directly
+/static/* /static/:splat 200
+/*.js /:splat.js 200
+/*.css /:splat.css 200
+/*.json /:splat.json 200
 
-# Vercel redirects
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# SPA routing - only for non-static files
+/* /index.html 200
