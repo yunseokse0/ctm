@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ConflictFeed.css';
 
 const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchConflict }) => {
+  const [expandedItems, setExpandedItems] = useState(new Set());
   const getSeverityColor = (severity) => {
     switch (severity) {
       case 'War': return '#dc3545';
@@ -29,6 +30,18 @@ const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchC
     });
   };
 
+  const toggleExpanded = (conflictId) => {
+    const newExpanded = new Set(expandedItems);
+    if (newExpanded.has(conflictId)) {
+      newExpanded.delete(conflictId);
+    } else {
+      newExpanded.add(conflictId);
+    }
+    setExpandedItems(newExpanded);
+  };
+
+  const isExpanded = (conflictId) => expandedItems.has(conflictId);
+
   return (
     <div className="conflict-feed">
           <div className="conflict-feed-header">
@@ -45,10 +58,9 @@ const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchC
         {conflicts.map(conflict => (
           <div 
             key={conflict.id}
-            className={`conflict-item ${selectedConflict?.id === conflict.id ? 'selected' : ''}`}
-            onClick={() => onConflictSelect(conflict)}
+            className={`conflict-item ${selectedConflict?.id === conflict.id ? 'selected' : ''} ${isExpanded(conflict.id) ? 'expanded' : ''}`}
           >
-            <div className="conflict-item-header">
+            <div className="conflict-item-header" onClick={() => onConflictSelect(conflict)}>
               <div 
                 className="severity-indicator"
                 style={{ backgroundColor: getSeverityColor(conflict.severity) }}
@@ -62,6 +74,15 @@ const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchC
                   <span className="conflict-type">{conflict.type}</span>
                 </div>
               </div>
+              <button 
+                className="expand-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleExpanded(conflict.id);
+                }}
+              >
+                {isExpanded(conflict.id) ? '−' : '+'}
+              </button>
             </div>
             
             <div className="conflict-details">
@@ -79,6 +100,58 @@ const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchC
                 </span>
               </div>
             </div>
+            
+            {isExpanded(conflict.id) && (
+              <div className="conflict-expanded-details">
+                <div className="expanded-section">
+                  <h4>📊 Conflict Analysis</h4>
+                  <div className="analysis-grid">
+                    <div className="analysis-item">
+                      <strong>Severity Level:</strong>
+                      <span className={`severity-badge ${conflict.severity.toLowerCase()}`}>
+                        {conflict.severity}
+                      </span>
+                    </div>
+                    <div className="analysis-item">
+                      <strong>Duration:</strong>
+                      <span>{Math.floor((new Date() - new Date(conflict.startDate)) / (1000 * 60 * 60 * 24))} days</span>
+                    </div>
+                    <div className="analysis-item">
+                      <strong>Type:</strong>
+                      <span>{conflict.type}</span>
+                    </div>
+                    <div className="analysis-item">
+                      <strong>Status:</strong>
+                      <span className={`status-badge ${conflict.status.toLowerCase()}`}>
+                        {conflict.status}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="expanded-section">
+                  <h4>🎯 Key Information</h4>
+                  <div className="info-list">
+                    <div className="info-item">
+                      <strong>Start Date:</strong> {formatDate(conflict.startDate)}
+                    </div>
+                    {conflict.casualties && (
+                      <div className="info-item">
+                        <strong>Casualties:</strong> {conflict.casualties}
+                      </div>
+                    )}
+                    <div className="info-item">
+                      <strong>Key Actors:</strong> {conflict.keyActors.join(', ')}
+                    </div>
+                    {conflict.description && (
+                      <div className="info-item">
+                        <strong>Description:</strong> {conflict.description}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
             
             <div className="conflict-actions">
               <button 

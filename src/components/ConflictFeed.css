@@ -76,6 +76,33 @@
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.expand-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.expand-button:hover {
+  background: #444444;
+  transform: scale(1.1);
 }
 
 .severity-indicator {
@@ -210,6 +237,109 @@
   text-decoration: none;
 }
 
+/* 확장된 상세 정보 스타일 */
+.conflict-expanded-details {
+  background: #2d2d2d;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+  border: 1px solid #444444;
+}
+
+.expanded-section {
+  margin-bottom: 16px;
+}
+
+.expanded-section:last-child {
+  margin-bottom: 0;
+}
+
+.expanded-section h4 {
+  margin: 0 0 12px 0;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #444444;
+  padding-bottom: 6px;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.analysis-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.analysis-item strong {
+  font-size: 11px;
+  color: #cccccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.analysis-item span {
+  font-size: 13px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.severity-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.severity-badge.war {
+  background: #dc3545;
+  color: #ffffff;
+}
+
+.severity-badge.conflict {
+  background: #fd7e14;
+  color: #ffffff;
+}
+
+.severity-badge.disorder {
+  background: #ffc107;
+  color: #000000;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: #333333;
+  border-radius: 6px;
+}
+
+.info-item strong {
+  font-size: 11px;
+  color: #cccccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item span {
+  font-size: 13px;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
 /* 스크롤바 스타일링 */
 .conflict-list::-webkit-scrollbar {
   width: 6px;
@@ -305,6 +435,37 @@
     min-width: 90px;
     border-radius: 6px;
   }
+  
+  .expand-button {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+  
+  .conflict-expanded-details {
+    padding: 12px;
+    margin: 10px 0;
+  }
+  
+  .analysis-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .expanded-section h4 {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  
+  .analysis-item {
+    padding: 6px;
+    background: #333333;
+    border-radius: 4px;
+  }
+  
+  .info-item {
+    padding: 6px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -364,6 +525,38 @@
     padding: 7px 10px;
     min-width: 80px;
   }
+  
+  .expand-button {
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+  
+  .conflict-expanded-details {
+    padding: 10px;
+    margin: 8px 0;
+  }
+  
+  .expanded-section h4 {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .analysis-item strong {
+    font-size: 10px;
+  }
+  
+  .analysis-item span {
+    font-size: 12px;
+  }
+  
+  .info-item strong {
+    font-size: 10px;
+  }
+  
+  .info-item span {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 360px) {
@@ -414,5 +607,45 @@
     font-size: 10px;
     padding: 6px 8px;
     min-width: 70px;
+  }
+  
+  .expand-button {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  
+  .conflict-expanded-details {
+    padding: 8px;
+    margin: 6px 0;
+  }
+  
+  .expanded-section h4 {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  
+  .analysis-item {
+    padding: 4px;
+  }
+  
+  .analysis-item strong {
+    font-size: 9px;
+  }
+  
+  .analysis-item span {
+    font-size: 11px;
+  }
+  
+  .info-item {
+    padding: 4px;
+  }
+  
+  .info-item strong {
+    font-size: 9px;
+  }
+  
+  .info-item span {
+    font-size: 11px;
   }
 }
