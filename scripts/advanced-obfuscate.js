@@ -30,42 +30,40 @@ function advancedObfuscate(content, key = 'ctm-secret-key-2024') {
 // 복호화 함수 (클라이언트에서 사용)
 function generateDecryptor() {
   return `
-(function() {
-  // 간단한 브라우저 호환 암호화 해제
-  function decrypt(encrypted, key = 'ctm-secret-key-2024') {
-    try {
-      // 역난독화
-      const deobfuscated = encrypted
-        .split('')
-        .map((char, index) => {
-          const code = char.charCodeAt(0);
-          return String.fromCharCode(code - (index % 3));
-        })
-        .join('');
-      
-      // Base64 디코딩 (브라우저 호환)
-      const decoded = atob(deobfuscated);
-      
-      // 간단한 XOR 복호화 (브라우저 호환)
-      let decrypted = '';
-      const keyBytes = new TextEncoder().encode(key);
-      for (let i = 0; i < decoded.length; i++) {
-        const charCode = decoded.charCodeAt(i) ^ keyBytes[i % keyBytes.length];
-        decrypted += String.fromCharCode(charCode);
-      }
-      
-      return decrypted;
-    } catch (e) {
-      console.error('Decryption failed:', e);
-      return encrypted;
+// 간단한 브라우저 호환 암호화 해제
+function decrypt(encrypted, key = 'ctm-secret-key-2024') {
+  try {
+    // 역난독화
+    const deobfuscated = encrypted
+      .split('')
+      .map((char, index) => {
+        const code = char.charCodeAt(0);
+        return String.fromCharCode(code - (index % 3));
+      })
+      .join('');
+    
+    // Base64 디코딩 (브라우저 호환)
+    const decoded = atob(deobfuscated);
+    
+    // 간단한 XOR 복호화 (브라우저 호환)
+    let decrypted = '';
+    const keyBytes = new TextEncoder().encode(key);
+    for (let i = 0; i < decoded.length; i++) {
+      const charCode = decoded.charCodeAt(i) ^ keyBytes[i % keyBytes.length];
+      decrypted += String.fromCharCode(charCode);
     }
+    
+    return decrypted;
+  } catch (e) {
+    console.error('Decryption failed:', e);
+    return encrypted;
   }
-  
-  // HTML 로드
-  const encryptedHTML = 'ENCRYPTED_HTML_PLACEHOLDER';
-  const decryptedHTML = decrypt(encryptedHTML);
-  document.write(decryptedHTML);
-})();
+}
+
+// HTML 로드
+const encryptedHTML = 'ENCRYPTED_HTML_PLACEHOLDER';
+const decryptedHTML = decrypt(encryptedHTML);
+document.write(decryptedHTML);
 `;
 }
 

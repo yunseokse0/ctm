@@ -1,0 +1,8 @@
+# Netlify redirects (if using Netlify)
+/*    /index.html   200
+
+# Vercel redirects
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
