@@ -80,6 +80,7 @@ const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchC
                   e.stopPropagation();
                   toggleExpanded(conflict.id);
                 }}
+                title={isExpanded(conflict.id) ? '상세 정보 닫기' : '상세 정보 보기'}
               >
                 {isExpanded(conflict.id) ? '−' : '+'}
               </button>

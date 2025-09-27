@@ -84,25 +84,31 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: #333333;
+  background: #007bff;
   color: #ffffff;
-  border: 1px solid #555555;
+  border: 1px solid #0056b3;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.2s ease;
   z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
 }
 
 .expand-button:hover {
-  background: #444444;
+  background: #0056b3;
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+.expand-button:active {
+  transform: scale(0.95);
 }
 
 .severity-indicator {
@@ -437,9 +443,15 @@
   }
   
   .expand-button {
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    background: #28a745;
+    border-color: #1e7e34;
+  }
+  
+  .expand-button:hover {
+    background: #1e7e34;
   }
   
   .conflict-expanded-details {
@@ -527,9 +539,15 @@
   }
   
   .expand-button {
-    width: 22px;
-    height: 22px;
-    font-size: 13px;
+    width: 26px;
+    height: 26px;
+    font-size: 15px;
+    background: #dc3545;
+    border-color: #bd2130;
+  }
+  
+  .expand-button:hover {
+    background: #bd2130;
   }
   
   .conflict-expanded-details {
@@ -610,9 +628,17 @@
   }
   
   .expand-button {
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    background: #ffc107;
+    border-color: #e0a800;
+    color: #000000;
+  }
+  
+  .expand-button:hover {
+    background: #e0a800;
+    color: #000000;
   }
   
   .conflict-expanded-details {
