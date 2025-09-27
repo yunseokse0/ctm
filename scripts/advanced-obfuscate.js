@@ -4,20 +4,16 @@ const crypto = require('crypto');
 
 // 고급 암호화 함수
 function advancedObfuscate(content, key = 'ctm-secret-key-2024') {
-  // 키를 32바이트로 변환 (AES-256용)
-  const keyBuffer = crypto.createHash('sha256').update(key).digest();
-  const iv = crypto.randomBytes(16);
-  
-  // AES 암호화
-  const cipher = crypto.createCipheriv('aes-256-cbc', keyBuffer, iv);
-  let encrypted = cipher.update(content, 'utf8', 'hex');
-  encrypted += cipher.final('hex');
-  
-  // IV와 암호화된 데이터를 결합
-  const combined = iv.toString('hex') + ':' + encrypted;
+  // 간단한 XOR 암호화 (브라우저 호환)
+  let encrypted = '';
+  const keyBytes = Buffer.from(key, 'utf8');
+  for (let i = 0; i < content.length; i++) {
+    const charCode = content.charCodeAt(i) ^ keyBytes[i % keyBytes.length];
+    encrypted += String.fromCharCode(charCode);
+  }
   
   // Base64 인코딩
-  const encoded = Buffer.from(combined).toString('base64');
+  const encoded = Buffer.from(encrypted, 'utf8').toString('base64');
   
   // 추가 난독화
   const obfuscated = encoded
@@ -35,6 +31,7 @@ function advancedObfuscate(content, key = 'ctm-secret-key-2024') {
 function generateDecryptor() {
   return `
 (function() {
+  // 간단한 브라우저 호환 암호화 해제
   function decrypt(encrypted, key = 'ctm-secret-key-2024') {
     try {
       // 역난독화
@@ -46,20 +43,16 @@ function generateDecryptor() {
         })
         .join('');
       
-      // Base64 디코딩
-      const decoded = Buffer.from(deobfuscated, 'base64').toString('utf8');
+      // Base64 디코딩 (브라우저 호환)
+      const decoded = atob(deobfuscated);
       
-      // IV와 암호화된 데이터 분리
-      const [ivHex, encryptedData] = decoded.split(':');
-      const iv = Buffer.from(ivHex, 'hex');
-      
-      // 키를 32바이트로 변환 (AES-256용)
-      const keyBuffer = require('crypto').createHash('sha256').update(key).digest();
-      
-      // AES 복호화
-      const decipher = require('crypto').createDecipheriv('aes-256-cbc', keyBuffer, iv);
-      let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
-      decrypted += decipher.final('utf8');
+      // 간단한 XOR 복호화 (브라우저 호환)
+      let decrypted = '';
+      const keyBytes = new TextEncoder().encode(key);
+      for (let i = 0; i < decoded.length; i++) {
+        const charCode = decoded.charCodeAt(i) ^ keyBytes[i % keyBytes.length];
+        decrypted += String.fromCharCode(charCode);
+      }
       
       return decrypted;
     } catch (e) {
