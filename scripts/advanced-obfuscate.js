@@ -87,10 +87,25 @@ htmlFiles.forEach(file => {
     const content = fs.readFileSync(sourcePath, 'utf8');
     const encrypted = advancedObfuscate(content);
     
-    // 암호화된 HTML을 JavaScript로 래핑
+    // 암호화된 HTML을 JavaScript로 래핑하고 HTML 구조에 포함
     const decryptor = generateDecryptor().replace('ENCRYPTED_HTML_PLACEHOLDER', encrypted);
     
-    fs.writeFileSync(targetPath, decryptor);
+    const htmlContent = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTM Emergency</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <script>
+    ${decryptor}
+    </script>
+</body>
+</html>`;
+    
+    fs.writeFileSync(targetPath, htmlContent);
     console.log(`Advanced obfuscated ${file}`);
   }
 });

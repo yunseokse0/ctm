@@ -1,4 +1,14 @@
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTM Emergency</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <script>
+    
 (function() {
   // 간단한 브라우저 호환 암호화 해제
   function decrypt(encrypted, key = 'ctm-secret-key-2024') {
@@ -35,3 +45,7 @@
   const decryptedHTML = decrypt(encryptedHTML);
   document.write(decryptedHTML);
 })();
+
+    </script>
+</body>
+</html>
