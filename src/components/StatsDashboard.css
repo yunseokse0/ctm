@@ -146,19 +146,24 @@
     margin: 8px;
     padding: 12px;
     max-width: none;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    z-index: 1000;
-    max-height: 60vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    z-index: auto;
+    max-height: none;
+    overflow: visible;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid #444444;
+    border-radius: 8px;
+    margin-bottom: 10px;
   }
   
   .stats-grid {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
+    margin-bottom: 12px;
   }
   
   .stat-card {
@@ -178,7 +183,29 @@
   }
   
   .severity-breakdown {
-    display: none;
+    display: block;
+  }
+  
+  .severity-breakdown h4 {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .severity-bars {
+    gap: 8px;
+  }
+  
+  .severity-bar {
+    gap: 8px;
+  }
+  
+  .bar-label {
+    font-size: 10px;
+    min-width: 40px;
+  }
+  
+  .bar-value {
+    font-size: 10px;
   }
 }
 
@@ -186,12 +213,13 @@
   .stats-dashboard {
     margin: 5px;
     padding: 10px;
-    max-height: 50vh;
+    margin-bottom: 8px;
   }
   
   .stats-grid {
     grid-template-columns: 1fr 1fr;
     gap: 6px;
+    margin-bottom: 10px;
   }
   
   .stat-card {
@@ -209,13 +237,36 @@
   .stat-label {
     font-size: 8px;
   }
+  
+  .severity-breakdown h4 {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  
+  .severity-bars {
+    gap: 6px;
+  }
+  
+  .bar-label {
+    font-size: 9px;
+    min-width: 35px;
+  }
+  
+  .bar-value {
+    font-size: 9px;
+  }
 }
 
 @media (max-width: 360px) {
   .stats-dashboard {
     margin: 3px;
     padding: 8px;
-    max-height: 45vh;
+    margin-bottom: 6px;
+  }
+  
+  .stats-grid {
+    gap: 4px;
+    margin-bottom: 8px;
   }
   
   .stat-card {
@@ -232,5 +283,23 @@
   
   .stat-label {
     font-size: 7px;
+  }
+  
+  .severity-breakdown h4 {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .severity-bars {
+    gap: 5px;
+  }
+  
+  .bar-label {
+    font-size: 8px;
+    min-width: 30px;
+  }
+  
+  .bar-value {
+    font-size: 8px;
   }
 }
