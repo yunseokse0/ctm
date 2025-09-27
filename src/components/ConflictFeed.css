@@ -14,17 +14,69 @@
   background: #2d2d2d;
 }
 
+.feed-title-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
 .conflict-feed-header h2 {
-  margin: 0 0 8px 0;
+  margin: 0;
   color: #ffffff;
   font-size: 18px;
   font-weight: 600;
+}
+
+.region-filter-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.region-filter-badge {
+  background: #007bff;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.region-reset-button {
+  background: #dc3545;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.region-reset-button:hover {
+  background: #c82333;
+  transform: scale(1.1);
 }
 
 .conflict-count {
   color: #cccccc;
   font-size: 14px;
   font-weight: 500;
+}
+
+.region-count {
+  color: #007bff;
+  font-weight: 600;
 }
 
 .donation-reminder {
@@ -382,8 +434,25 @@
     flex-shrink: 0;
   }
   
+  .feed-title-section {
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  
   .conflict-feed-header h2 {
     font-size: 16px;
+    margin: 0;
+  }
+  
+  .region-filter-badge {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+  
+  .region-reset-button {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
   }
   
   .conflict-list {

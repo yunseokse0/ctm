@@ -20,6 +20,7 @@ function App() {
   const [searchConflict, setSearchConflict] = useState(null);
   const [showStats, setShowStats] = useState(false);
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [selectedRegion, setSelectedRegion] = useState(null);
   // const [showDonationPrompt, setShowDonationPrompt] = useState(false);
   const [severityFilters, setSeverityFilters] = useState({
     war: true,
@@ -64,7 +65,7 @@ function App() {
   }, [updateCount, severityFilters, advancedFilters]);
 
   // 통합 필터링 함수
-  const applyFilters = useCallback((conflictsData, severityFilters, advancedFilters) => {
+  const applyFilters = useCallback((conflictsData, severityFilters, advancedFilters, selectedRegion = null) => {
     return conflictsData.filter(conflict => {
       // 심각도 필터
       if (conflict.severity === 'War' && !severityFilters.war) return false;
@@ -93,6 +94,12 @@ function App() {
         if (region !== advancedFilters.region) return false;
       }
 
+      // 선택된 지역 필터 (지도 클릭으로 선택된 지역)
+      if (selectedRegion) {
+        const region = getRegionFromCoordinates(conflict.lat, conflict.lng);
+        if (region !== selectedRegion) return false;
+      }
+
       return true;
     });
   }, []);
@@ -109,9 +116,9 @@ function App() {
 
   useEffect(() => {
     // 통합 필터 적용
-    const filtered = applyFilters(conflicts, severityFilters, advancedFilters);
+    const filtered = applyFilters(conflicts, severityFilters, advancedFilters, selectedRegion);
     setFilteredConflicts(filtered);
-  }, [conflicts, severityFilters, advancedFilters, applyFilters]);
+  }, [conflicts, severityFilters, advancedFilters, selectedRegion, applyFilters]);
 
   const handleConflictSelect = (conflict) => {
     setSelectedConflict(conflict);
@@ -131,6 +138,14 @@ function App() {
 
   const handleAdvancedFilterChange = (newFilters) => {
     setAdvancedFilters(newFilters);
+  };
+
+  const handleRegionSelect = (region) => {
+    setSelectedRegion(region);
+  };
+
+  const handleRegionReset = () => {
+    setSelectedRegion(null);
   };
 
   const handleManualRefresh = async () => {
@@ -176,13 +191,17 @@ function App() {
           <MapComponent 
             conflicts={filteredConflicts}
             onConflictSelect={handleConflictSelect}
+            onRegionSelect={handleRegionSelect}
+            selectedRegion={selectedRegion}
           />
           
           <ConflictFeed 
-            conflicts={conflicts}
+            conflicts={filteredConflicts}
             selectedConflict={selectedConflict}
             onConflictSelect={handleConflictSelect}
             onSearchConflict={handleSearchConflict}
+            selectedRegion={selectedRegion}
+            onRegionReset={handleRegionReset}
           />
         </div>
 

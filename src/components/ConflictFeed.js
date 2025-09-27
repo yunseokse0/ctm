@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ConflictFeed.css';
 
-const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchConflict }) => {
+const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchConflict, selectedRegion, onRegionReset }) => {
   const [expandedItems, setExpandedItems] = useState(new Set());
   const getSeverityColor = (severity) => {
     switch (severity) {
@@ -45,9 +45,26 @@ const ConflictFeed = ({ conflicts, selectedConflict, onConflictSelect, onSearchC
   return (
     <div className="conflict-feed">
           <div className="conflict-feed-header">
-            <h2>Conflict Log & Analysis Feed</h2>
+            <div className="feed-title-section">
+              <h2>Conflict Log & Analysis Feed</h2>
+              {selectedRegion && (
+                <div className="region-filter-info">
+                  <span className="region-filter-badge">
+                    📍 {selectedRegion} 지역
+                  </span>
+                  <button 
+                    className="region-reset-button"
+                    onClick={onRegionReset}
+                    title="전체 지역으로 돌아가기"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
+            </div>
             <div className="conflict-count">
               {conflicts.length} Active Conflicts
+              {selectedRegion && <span className="region-count"> in {selectedRegion}</span>}
             </div>
             <div className="donation-reminder">
               💝 <strong>Support our mission:</strong> Help us maintain free, unbiased conflict monitoring
