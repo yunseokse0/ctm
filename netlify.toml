@@ -2,6 +2,28 @@
   publish = "build-secure"
   command = "echo 'Static files already built'"
 
+# Serve static files directly
+[[redirects]]
+  from = "/static/*"
+  to = "/static/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*.js"
+  to = "/:splat.js"
+  status = 200
+
+[[redirects]]
+  from = "/*.css"
+  to = "/:splat.css"
+  status = 200
+
+[[redirects]]
+  from = "/*.json"
+  to = "/:splat.json"
+  status = 200
+
+# SPA routing - only for non-static files
 [[redirects]]
   from = "/*"
   to = "/index.html"
