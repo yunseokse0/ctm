@@ -4,13 +4,20 @@ const crypto = require('crypto');
 
 // 고급 암호화 함수
 function advancedObfuscate(content, key = 'ctm-secret-key-2024') {
+  // 키를 32바이트로 변환 (AES-256용)
+  const keyBuffer = crypto.createHash('sha256').update(key).digest();
+  const iv = crypto.randomBytes(16);
+  
   // AES 암호화
-  const cipher = crypto.createCipher('aes192', key);
+  const cipher = crypto.createCipheriv('aes-256-cbc', keyBuffer, iv);
   let encrypted = cipher.update(content, 'utf8', 'hex');
   encrypted += cipher.final('hex');
   
+  // IV와 암호화된 데이터를 결합
+  const combined = iv.toString('hex') + ':' + encrypted;
+  
   // Base64 인코딩
-  const encoded = Buffer.from(encrypted).toString('base64');
+  const encoded = Buffer.from(combined).toString('base64');
   
   // 추가 난독화
   const obfuscated = encoded
@@ -42,9 +49,16 @@ function generateDecryptor() {
       // Base64 디코딩
       const decoded = Buffer.from(deobfuscated, 'base64').toString('utf8');
       
+      // IV와 암호화된 데이터 분리
+      const [ivHex, encryptedData] = decoded.split(':');
+      const iv = Buffer.from(ivHex, 'hex');
+      
+      // 키를 32바이트로 변환 (AES-256용)
+      const keyBuffer = require('crypto').createHash('sha256').update(key).digest();
+      
       // AES 복호화
-      const decipher = require('crypto').createDecipher('aes192', key);
-      let decrypted = decipher.update(decoded, 'hex', 'utf8');
+      const decipher = require('crypto').createDecipheriv('aes-256-cbc', keyBuffer, iv);
+      let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
       decrypted += decipher.final('utf8');
       
       return decrypted;
